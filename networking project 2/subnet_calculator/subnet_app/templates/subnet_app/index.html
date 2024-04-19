@@ -1,0 +1,46 @@
+<!-- subnet_calculator/subnet_app/templates/subnet_app/index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subnet Calculator</title>
+</head>
+<body>
+    <h1>Subnet Calculator</h1>
+
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="ip_address">IP Address:</label>
+        <input type="text" name="ip_address" required><br><br>
+
+        <label for="subnet_bits">Subnet Bits:</label>
+        <input type="number" name="subnet_bits" min="1" max="30" required><br><br>
+
+        <input type="submit" value="Calculate">
+    </form>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if subnet_details %}
+    <h2>IP Address Details</h2>
+    <p>Entered IP Address: {{ subnet_details.Entered_IP_Address }}</p>
+    <p>Entered Subnet Bits: {{ subnet_details.Entered_Subnet_Bits }}</p>
+    <p>Octet 1: {{ subnet_details.Octet_1 }}</p>
+    <p>Octet 2: {{ subnet_details.Octet_2 }}</p>
+    <p>Octet 3: {{ subnet_details.Octet_3 }}</p>
+    <p>Octet 4: {{ subnet_details.Octet_4 }}</p>
+    <h2>Subnet Details</h2>
+    <p>Subnet Mask: {{ subnet_details.Subnet_Mask }}</p>
+    <p>Network Address: {{ subnet_details.Network_Address }}</p>
+    <p>Broadcast Address: {{ subnet_details.Broadcast_Address }}</p>
+    <p>Number of Usable Hosts: {{ subnet_details.Usable_Hosts }}</p>
+    <p>IP address Class: {{ subnet_details.Class_of_the_IPV4_address }}</p>
+    <p>First Host Address: {{ subnet_details.First_Host_Address }}</p>
+    <p>Last Host Address: {{ subnet_details.Last_Host_Address }}</p>
+    {% endif %}
+
+</body>
+</html>
